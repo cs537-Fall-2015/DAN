@@ -13,6 +13,8 @@ import json.Constants;
 import server.DanClient;
 import server.DanServer;
 
+
+// This is main class file
 public class MasterMain {
 
 	public static void main(String[] args) {
@@ -20,7 +22,6 @@ public class MasterMain {
 		//Each module has its own port
 		int port_one = Constants.PORT_ONE;
 		int port_two = Constants.PORT_TWO;
-		
 		try {
 			
 			// create a thread for module one
