@@ -19,7 +19,7 @@ public class MasterMain {
 		
 		//Each module has its own port
 		int port_one = Constants.PORT_ONE;
-		int port_two = Constants.PORT_TWO;
+		//int port_two = Constants.PORT_TWO;
 		
 		try {
 			
