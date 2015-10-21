@@ -20,6 +20,8 @@ public class DanMain {
 		
 		try {
 			
+			
+			
 			// create a thread for module one
 			DanServer serverOne = new DanServer(port_one);
 			Thread server_1 = RoverThreadHandler.getRoverThreadHandler().getNewThread(serverOne);
@@ -39,13 +41,14 @@ public class DanMain {
 			// client one server sending messages to server two
 			DanClient clientOne = new DanClient(port_one, null); // notice port_two
 			Thread client_1 = RoverThreadHandler.getRoverThreadHandler().getNewThread(clientOne);
-			
+			System.out.println("client1 is giong to start");
 			// client two server sending messages to server one
 		//	ModuleTwoClient clientTwo = new ModuleTwoClient(port_one, null); // notice port_one
 		//	Thread client_2 = RoverThreadHandler.getRoverThreadHandler().getNewThread(clientOne);
 				
 			// start the thread which communicates through sockets
 			client_1.start();
+			System.out.println("client 1 is started");
 		//	client_2.start();
 			
 		} 

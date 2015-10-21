@@ -25,18 +25,33 @@ public class DanClient extends RoverClientRunnable{
 			ObjectOutputStream outputToAnotherObject = null;
 		    ObjectInputStream inputFromAnotherObject = null;
 		    Thread.sleep(5000);
-	           
+		    
+		    // Write message to the server
+		    outputToAnotherObject = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
+		    // Read message from the server
+		    inputFromAnotherObject = new ObjectInputStream(getRoverSocket().getSocket().getInputStream());
 	            
-	         //   if(	DanClass.DAN_ON == true )
-	        //    {
-	            	System.out.println("Client: Sending request to Socket Server");
+		    String [] commands = DanClass.getCommands();
+		    
+		    for(int i = 0; i <commands.length; i++) {
+		    	if (commands[i].toUpperCase().contains("OFF"))
+		    		Thread.sleep(5000);
+		    	outputToAnotherObject.writeObject(commands[i]);
+		    	String message = (String) inputFromAnotherObject.readObject();
+		    	System.out.println(" ");
+				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		    	System.out.println("Client : Message from Server - " + message);
+				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+				System.out.println(" ");
+		    }
+	            	/*System.out.println("Client: Sending request to Socket Server");
 	 	            
-	            	outputToAnotherObject = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
+	            	
 	            	
 	            	outputToAnotherObject.writeObject("HYDROGEN CONTENT??");
 	            	
 	            	 //read the server response message
-		            inputFromAnotherObject = new ObjectInputStream(getRoverSocket().getSocket().getInputStream());
+		            
 		            
 		            
 		            String message = (String) inputFromAnotherObject.readObject();
@@ -53,6 +68,7 @@ public class DanClient extends RoverClientRunnable{
 	          
 	            
 	            //close resources
+	             */
 	           	inputFromAnotherObject.close();
 	           	outputToAnotherObject.close();
 	           	Thread.sleep(5000);
