@@ -52,6 +52,7 @@ public class DanServer extends RoverServerRunnable {
 	}
 	public void setHydFromSpeed(DanClass dan) {
 		float hydInfo;
+		System.out.println("Speed of the Neutron is " +dan.getSpeed());
 		if (dan.getSpeed() < 25) {
 			hydInfo = 50 + (int)(Math.random() * (50 + 1));
 			dan.setDAN_HYD_INFO(hydInfo);
