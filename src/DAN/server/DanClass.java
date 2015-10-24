@@ -26,7 +26,7 @@ public class DanClass {
 		this.setDAN_PNG_ON(true);
 		this.setDAN_DE_ON(false);
 		this.setDAN_HYD_INFO(0.0);
-		this.setSpeed(0.0);
+		this.setSpeed(Math.random()*100);
 		this.setRover_x(10.0);
 		this.setRover_y(15.0);
 	}

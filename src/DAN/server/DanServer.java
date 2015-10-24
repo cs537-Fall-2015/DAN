@@ -50,6 +50,28 @@ public class DanServer extends RoverServerRunnable {
 		}
 		return message;
 	}
+	public void setHydFromSpeed(DanClass dan) {
+		float hydInfo;
+		if (dan.getSpeed() < 25) {
+			hydInfo = 50 + (int)(Math.random() * (50 + 1));
+			dan.setDAN_HYD_INFO(hydInfo);
+		}
+		else if( dan.getSpeed() >= 25 && dan.getSpeed() < 50)
+		{
+			hydInfo = 25 + (int)(Math.random() * (25 + 1));
+			dan.setDAN_HYD_INFO(hydInfo);
+		}
+		else if(dan.getSpeed() >= 50 && dan.getSpeed() < 75)
+		{
+			hydInfo = 0 + (int)(Math.random() * (25 + 1));
+		}
+		else 
+		{
+			hydInfo = 0;
+									
+		}
+		dan.setDAN_HYD_INFO(hydInfo);
+	}	
 	@Override
 	public void run() {
 		
@@ -103,12 +125,15 @@ public class DanServer extends RoverServerRunnable {
 						break;
 					case "DAN_TURN_DE_ON":
 						messageToClient = "DAN de is turned on";
+						System.out.println("Measuring the rate of delayed neutron. Please wait...");
+						Thread.sleep(1000);
+						setHydFromSpeed(dan);
 						break;
 					case "DAN_TURN_DE_OFF":
 						messageToClient = "DAN de is turned off";
 						break;
 					case "DAN_HYD_INFO":
-						messageToClient = "DAN hyd info";
+						messageToClient = "Percentage of hydrogen found is " + dan.getDAN_HYD_INFO()+ "%";
 						break;
 					case "DAN_TURN_OFF":
 						messageToClient = "DAN turned off";
@@ -123,7 +148,8 @@ public class DanServer extends RoverServerRunnable {
 				}
 			}
 			
-						inputFromAnotherObject.close();
+			new MyWriter(dan, 10);
+			inputFromAnotherObject.close();
           	outputToAnotherObject.close();
 			// close the ServerSocket object
 			closeAll();
