@@ -52,7 +52,6 @@ public class MasterMain {
 			//client_2.start();
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
