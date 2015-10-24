@@ -11,8 +11,6 @@ public class DanClass {
 	private double rover_x;
 	private double rover_y;
 	
-	
-	
 	public DanClass(int i) {
 		this.setDAN_ON(true);
 		this.setDAN_PNG_ON(true);
