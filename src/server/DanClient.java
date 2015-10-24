@@ -62,7 +62,6 @@ public class DanClient extends RoverClientRunnable{
         
 		catch (UnknownHostException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
