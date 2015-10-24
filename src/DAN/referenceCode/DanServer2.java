@@ -1,4 +1,4 @@
-package server2;
+package DAN.referenceCode;
 
 public class DanServer2 {
 

@@ -1,4 +1,4 @@
-package server;
+package DAN.server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -112,7 +112,7 @@ public class DanServer extends RoverServerRunnable {
 			closeAll();
 			
 			//inform the CCDS group9 about job completion.
-			//orelse we will get Connection refused exception which is mostly due to Group 9 server being down 
+			//or else we will get Connection refused exception which is mostly due to Group 9 server being down 
 			//new CallBack().done();
 		}
 		

@@ -1,4 +1,4 @@
-package usecase;
+package DAN.referenceCode.useCases;
 
 import generic.RoverThreadHandler;
 
@@ -7,7 +7,6 @@ import java.io.IOException;
 public class UseCaseMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int port = 9897;
 		
 		try {
@@ -22,10 +21,8 @@ public class UseCaseMain {
 			
 			client.start();
 			
-			
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

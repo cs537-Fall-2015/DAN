@@ -1,4 +1,4 @@
-package server;
+package DAN.server;
 
 import callback.CallBack;
 
@@ -10,8 +10,6 @@ public class DanClass {
 	private double speed;
 	private double rover_x;
 	private double rover_y;
-	
-	
 	
 	public DanClass(int i) {
 		this.setDAN_ON(true);
