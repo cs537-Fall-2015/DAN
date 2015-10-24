@@ -30,7 +30,6 @@ public class CallBackClient extends RoverClientRunnable{
             closeAll();
 		}	        
         catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (Exception error) {

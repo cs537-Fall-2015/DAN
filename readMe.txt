@@ -11,3 +11,7 @@
 +If Needed:
 -select JRE System Library -> Edit -> Installed JREs
 -change to another JRE if needed (preferably 1.7 or higher)
+
++To run the Program:
+-run DanMain or MasterMain
+
