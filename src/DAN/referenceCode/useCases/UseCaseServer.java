@@ -1,4 +1,4 @@
-package usecase;
+package DAN.referenceCode.useCases;
 
 import generic.RoverServerRunnable;
 
@@ -10,12 +10,10 @@ public class UseCaseServer extends RoverServerRunnable{
 
 	public UseCaseServer(int port) throws IOException {
 		super(port);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try {			
 			while(true){				
 	            System.out.println("Server: Waiting for client request");	            
@@ -42,11 +40,9 @@ public class UseCaseServer extends RoverServerRunnable{
 	        closeAll();
 		}
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	    catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 	    }
         catch(Exception error){

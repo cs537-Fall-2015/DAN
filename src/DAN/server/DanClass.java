@@ -1,12 +1,13 @@
-package server;
+package DAN.server;
 
 import callback.CallBack;
 
 public class DanClass {
-	private boolean DAN_ON;
-	private boolean DAN_PNG_ON;
-	private boolean DAN_DE_ON;
-	private double DAN_HYD_INFO;
+
+	static boolean DAN_ON; //DAN: Dynamic Albedo of Neutrons
+	static boolean DAN_PNG_ON; //PNG: Pulsed Neutron Generator
+	static boolean DAN_DE_ON; //DE: Detector Element
+	private double DAN_HYD_INFO; //HYD: Hydrogen
 	private double speed;
 	private double rover_x;
 	private double rover_y;
@@ -19,9 +20,10 @@ public class DanClass {
 								  "DAN_TURN_OFF"
 								};
 	
+
 	public DanClass() {
-		this.setDAN_ON(false);
-		this.setDAN_PNG_ON(false);
+		this.setDAN_ON(true);
+		this.setDAN_PNG_ON(true);
 		this.setDAN_DE_ON(false);
 		this.setDAN_HYD_INFO(0.0);
 		this.setSpeed(0.0);

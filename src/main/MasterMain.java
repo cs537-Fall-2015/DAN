@@ -10,8 +10,8 @@ import generic.RoverThreadHandler;
 import java.io.IOException;
 
 import json.Constants;
-import server.DanClient;
-import server.DanServer;
+import DAN.server.DanClient;
+import DAN.server.DanServer;
 
 
 // This is main class file
