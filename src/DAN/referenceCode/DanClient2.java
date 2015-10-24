@@ -1,4 +1,4 @@
-package server2;
+package DAN.referenceCode;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -31,7 +31,6 @@ public class DanClient2 extends RoverClientRunnable{
 	        closeAll();
 		}	        
         catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (Exception error) {

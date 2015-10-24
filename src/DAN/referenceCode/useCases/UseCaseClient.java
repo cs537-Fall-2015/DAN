@@ -1,4 +1,4 @@
-package usecase;
+package DAN.referenceCode.useCases;
 
 import generic.RoverClientRunnable;
 
@@ -11,12 +11,10 @@ public class UseCaseClient extends RoverClientRunnable{
 
 	public UseCaseClient(int port, InetAddress host) throws UnknownHostException {
 		super(port, host);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try{
 			ObjectOutputStream oos = null;
 		    ObjectInputStream ois = null;
@@ -41,7 +39,6 @@ public class UseCaseClient extends RoverClientRunnable{
 	        closeAll();
 		}	        
         catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		catch (Exception error) {
