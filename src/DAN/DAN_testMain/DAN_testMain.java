@@ -4,10 +4,10 @@ import generic.RoverThreadHandler;
 
 import java.io.IOException;
 
+import DAN.server.DanServer;
 //import module2.ModuleTwoClient;
 //import module2.ModuleTwoServer;
-import server.DanClient;
-import server.DanServer;
+import DAN.server.DanClient;
 import json.Constants;
 
 public class DAN_testMain {
