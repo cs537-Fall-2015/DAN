@@ -1,36 +1,18 @@
 package DAN.server;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.LayoutManager;
-import java.awt.geom.Line2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.json.simple.JSONObject;
 
-import callback.CallBack;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import json.Constants;
-import json.GlobalReader;
 import json.MyWriter;
 import generic.RoverServerRunnable;
 
@@ -50,10 +32,10 @@ public class DanServer extends RoverServerRunnable {
 		}
 		return message;
 	}
-<<<<<<< HEAD
 	public void setHydFromSpeed(DanClass dan) {
 		float hydInfo;
 		System.out.println("Speed of the Neutron is " +dan.getSpeed());
+
 		if (dan.getSpeed() < 25) {
 			hydInfo = 50 + (int)(Math.random() * (50 + 1));
 			dan.setDAN_HYD_INFO(hydInfo);
@@ -74,8 +56,7 @@ public class DanServer extends RoverServerRunnable {
 		}
 		dan.setDAN_HYD_INFO(hydInfo);
 	}	
-=======
->>>>>>> c7cce9b605364282ccb2c576619289944d0fa16c
+
 	@Override
 	public void run() {
 		
@@ -129,22 +110,19 @@ public class DanServer extends RoverServerRunnable {
 						break;
 					case "DAN_TURN_DE_ON":
 						messageToClient = "DAN de is turned on";
-<<<<<<< HEAD
 						System.out.println("Measuring the rate of delayed neutron. Please wait...");
 						Thread.sleep(1000);
 						setHydFromSpeed(dan);
-=======
->>>>>>> c7cce9b605364282ccb2c576619289944d0fa16c
+						System.out.println("Measuring the rate of delayed neutron. Please wait...");
+						Thread.sleep(1000);
+						setHydFromSpeed(dan);
 						break;
 					case "DAN_TURN_DE_OFF":
 						messageToClient = "DAN de is turned off";
 						break;
 					case "DAN_HYD_INFO":
-<<<<<<< HEAD
+
 						messageToClient = "Percentage of hydrogen found is " + dan.getDAN_HYD_INFO()+ "%";
-=======
-						messageToClient = "DAN hyd info";
->>>>>>> c7cce9b605364282ccb2c576619289944d0fa16c
 						break;
 					case "DAN_TURN_OFF":
 						messageToClient = "DAN turned off";
@@ -159,12 +137,8 @@ public class DanServer extends RoverServerRunnable {
 				}
 			}
 			
-<<<<<<< HEAD
 			new MyWriter(dan, 10);
 			inputFromAnotherObject.close();
-=======
-						inputFromAnotherObject.close();
->>>>>>> c7cce9b605364282ccb2c576619289944d0fa16c
           	outputToAnotherObject.close();
 			// close the ServerSocket object
 			closeAll();
