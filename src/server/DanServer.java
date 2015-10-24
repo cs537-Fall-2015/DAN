@@ -3,6 +3,7 @@ package server;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.LayoutManager;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,6 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import org.json.simple.JSONObject;
 
@@ -51,23 +56,19 @@ public class DanServer extends RoverServerRunnable {
 		DanClass dan = new DanClass ();
 		
 		JFrame window = new JFrame();
-	    //window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    window.setBounds(300, 300, 300, 300);
+		window.setBounds(100, 100, 450, 300);
+		window.setTitle("Rover");
 	    window.setVisible(true);
-	    JLabel text = new JLabel("");
-	    window.add(text);
-	    window.add(new JPanel(){
-	    	@Override
-	    	public void paintComponent(Graphics g){
-	    		super.paintComponent(g);
-	    		g.drawRect(100, 100, 105, 105);
-	    		g.drawString("DAN", 125, 170 );
-
-	    	}
-	    }, BorderLayout.CENTER);
-	    
-	    
-
+	    JPanel contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		window.setContentPane(contentPane);
+		final JTextArea clientText = new JTextArea(20, 20);
+		JScrollPane scrollPane = new JScrollPane(clientText);
+		contentPane.add(scrollPane, "cell 1 1,grow");
+		
+		final JTextField cmdText = new JTextField();
+		contentPane.add(cmdText, "flowx,cell 1 2,alignx left,growy");
+		cmdText.setColumns(30);
 		
 		
 		try {
@@ -89,10 +90,6 @@ public class DanServer extends RoverServerRunnable {
 					case "DAN_TURN_ON":
 						System.out.println("DAN is turning on. Please wait..");
 						Thread.sleep(2000);
-						text.setForeground(Color.GREEN);
-						//text.setBackground(Color.GREEN);
-						text.setText(messageFromClient);
-
 						messageToClient = "DAN is turned on";
 						dan.setDAN_ON(true);
 						break;
@@ -126,86 +123,7 @@ public class DanServer extends RoverServerRunnable {
 				}
 			}
 			
-			/*while (DanClass.DAN_ON == true) 
-			{
-				System.out.println("Server: Waiting for client request.......");
-				
-
-				// creating socket and waiting for client connection
-				getRoverServerSocket().openSocket();
-				System.out.println("socket open");
-				// read from socket to ObjectInputStream object
-				ObjectInputStream inputFromAnotherObject = new ObjectInputStream(getRoverServerSocket().getSocket().getInputStream());
-				
-				// convert ObjectInputStream object to String
-				String message = (String) inputFromAnotherObject.readObject();
-				System.out.println("Server: Message Received from Client - "+ message.toUpperCase());  //Hydrogen content
-				
-				// create ObjectOutputStream object
-				ObjectOutputStream outputToAnotherObject = new ObjectOutputStream(getRoverServerSocket().getSocket().getOutputStream());
-				
-				outputToAnotherObject.writeObject("HELLO");
-				
-				if (DanClass.DAN_PNG_ON == true)
-				{
-					DanClass.DAN_DE_ON = true;
-					outputToAnotherObject.writeObject("Calculating the speed of Neutrons.... ");
-					System.out.println("Server: Speed is " +moduleOneClass.getSpeed());
-					double a;
-					
-					if( moduleOneClass.getSpeed() < 25 )
-					{
-						// write object to Socket
-						//Generating random integers in a range
-						//Min + (int)(Math.random() * ((Max - Min) + 1))
-						
-						a = 50 + (int)(Math.random() * (50 + 1));
-						moduleOneClass.setDAN_H_CONTENT(a);
-						outputToAnotherObject.writeObject("Percentage of Hydrogen found is : "  + a +  "% at location " +moduleOneClass.getrover_x()+ " " +moduleOneClass.getrover_y());
-						
-					}
-					else if( moduleOneClass.getSpeed() >= 25 && moduleOneClass.getSpeed() < 50)
-					{
-						a = 25 + (int)(Math.random() * (25 + 1));
-						moduleOneClass.setDAN_H_CONTENT(a);
-						outputToAnotherObject.writeObject("Percentage of Hydrogen found is : "  + a +  "% at location " +moduleOneClass.getrover_x()+ " " +moduleOneClass.getrover_y());
-						
-					}
-					else if( moduleOneClass.getSpeed() >= 50 && moduleOneClass.getSpeed() < 75)
-					{
-						a = 0 + (int)(Math.random() * (25 + 1));
-						moduleOneClass.setDAN_H_CONTENT(a);
-						outputToAnotherObject.writeObject("Percentage of Hydrogen found is : "  + a +  "% at location " +moduleOneClass.getrover_x()+ " " +moduleOneClass.getrover_y()); 
-						
-					}
-					else 
-					{
-						outputToAnotherObject.writeObject("There is no Hydrogen content present");
-						
-					}
-					
-					new MyWriter(moduleOneClass, 19);
-					DanClass.DAN_PNG_ON = false;
-					DanClass.DAN_DE_ON = false;
-					System.out.println("Job Done!!!");
-					System.out.println("Server shut down");
-				}
-				else
-				{
-					System.out.println("DAN_PNG_ON is false");
-					//break;
-				}	
-				
-				DanClass.DAN_ON = false;
-				
-				//close resources
-	           	inputFromAnotherObject.close();
-	          	outputToAnotherObject.close();
-				
-			}
-			 
-*/			
-			inputFromAnotherObject.close();
+						inputFromAnotherObject.close();
           	outputToAnotherObject.close();
 			// close the ServerSocket object
 			closeAll();
