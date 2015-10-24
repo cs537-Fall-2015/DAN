@@ -3,10 +3,10 @@ package server;
 import callback.CallBack;
 
 public class DanClass {
-	static boolean DAN_ON;
-	static boolean DAN_PNG_ON;
-	static boolean DAN_DE_ON;
-	private double DAN_COLLECT_HYD;
+	static boolean DAN_ON; //DAN: Dynamic Albedo of Neutrons
+	static boolean DAN_PNG_ON; //PNG: Pulsed Neutron Generator
+	static boolean DAN_DE_ON; //DE: Detector Element
+	private double DAN_COLLECT_HYD; //HYD: Hydrogen
 	private double speed;
 	private double rover_x;
 	private double rover_y;
