@@ -5,11 +5,6 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import json.Constants;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import generic.RoverClientRunnable;
 
 public class DanClient2 extends RoverClientRunnable{
@@ -26,8 +21,11 @@ public class DanClient2 extends RoverClientRunnable{
 		    ObjectInputStream inputFromAnotherObject = null;
 		    Thread.sleep(5500);
 		    
+		    inputFromAnotherObject=new ObjectInputStream(getRoverSocket().getNewSocket().getInputStream());
+		    
 		    outputToAnotherObject = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
-		    outputToAnotherObject.writeObject("Power is ON");		   
+		    outputToAnotherObject.writeObject("Output Socket Power is ON");
+		    
 	        closeAll();
 		}	        
         catch (UnknownHostException e) {
