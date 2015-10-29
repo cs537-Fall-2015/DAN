@@ -39,9 +39,9 @@ public class DanClient extends RoverClientRunnable{
 		    	outputToAnotherObject.writeObject(commands[i]);
 		    	String message = (String) inputFromAnotherObject.readObject();
 		    	System.out.println(" ");
-				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 		    	System.out.println("Client : Message from Server - " + message);
-				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+				System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 				System.out.println(" ");
 		    }
 	           	inputFromAnotherObject.close();
