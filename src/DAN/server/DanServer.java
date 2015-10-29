@@ -1,6 +1,7 @@
 package DAN.server;
 
 
+import java.awt.BorderLayout;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -63,20 +64,17 @@ public class DanServer extends RoverServerRunnable {
 		DanClass dan = new DanClass ();
 		
 		JFrame window = new JFrame();
-		window.setBounds(100, 100, 450, 300);
+		window.setBounds(100,100, 450, 300);
 		window.setTitle("Rover");
 	    window.setVisible(true);
-	    JPanel contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	    JPanel contentPane = new JPanel(new BorderLayout());
 		window.setContentPane(contentPane);
-		final JTextArea clientText = new JTextArea(20, 20);
+		final JTextArea clientText = new JTextArea();
 		JScrollPane scrollPane = new JScrollPane(clientText);
-		contentPane.add(scrollPane, "cell 1 1,grow");
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		final JTextField cmdText = new JTextField();
-		contentPane.add(cmdText, "flowx,cell 1 2,alignx left,growy");
-		cmdText.setColumns(30);
-		
+		contentPane.add(cmdText,BorderLayout.SOUTH);
 		
 		try {
 			
@@ -89,9 +87,9 @@ public class DanServer extends RoverServerRunnable {
 			while(true) {
 				String messageFromClient = (String) inputFromAnotherObject.readObject();
 				String messageToClient= null;
-				System.out.println("------------------------------------------------------------------");
-				System.out.println("Server : COMMAND RECEIVED - "+messageFromClient);
-				System.out.println("------------------------------------------------------------------");
+				clientText.append("------------------------------------------------------------------\n");
+				clientText.append("Server : COMMAND RECEIVED - "+messageFromClient+"\n");
+				clientText.append("------------------------------------------------------------------\n");
 				
 				switch(messageFromClient) {
 					case "DAN_TURN_ON":
