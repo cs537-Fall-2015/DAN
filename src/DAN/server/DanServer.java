@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.text.DefaultCaret;
 
 import json.MyWriter;
 import generic.RoverServerRunnable;
@@ -23,19 +23,19 @@ public class DanServer extends RoverServerRunnable {
 		super(port);
 	}
 	
-	public String turnPngOn(DanClass dan) throws InterruptedException {
+	public String turnPngOn(DanClass dan, JTextArea clientText) throws InterruptedException {
 		String message = null;
 		if(dan.isDAN_ON()) {
 			dan.setDAN_PNG_ON(true);
-			System.out.println("Generating Pulse Neutron..");
+			clientText.append("\nGenerating Pulse Neutron..\n");
 			Thread.sleep(3000);
 			message = " Pulsed Neutron is turned on Successfully";
 		}
 		return message;
 	}
-	public void setHydFromSpeed(DanClass dan) {
+	public void setHydFromSpeed(DanClass dan, JTextArea clientText) {
 		float hydInfo;
-		System.out.println("Speed of the Neutron is " +dan.getSpeed());
+		clientText.append("\n Speed of the Neutron is " +dan.getSpeed()+ "\n");
 
 		if (dan.getSpeed() < 25) {
 			hydInfo = 50 + (int)(Math.random() * (50 + 1));
@@ -70,6 +70,8 @@ public class DanServer extends RoverServerRunnable {
 	    JPanel contentPane = new JPanel(new BorderLayout());
 		window.setContentPane(contentPane);
 		final JTextArea clientText = new JTextArea();
+		DefaultCaret caret = (DefaultCaret)clientText.getCaret();
+		 caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		JScrollPane scrollPane = new JScrollPane(clientText);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
@@ -87,33 +89,30 @@ public class DanServer extends RoverServerRunnable {
 			while(true) {
 				String messageFromClient = (String) inputFromAnotherObject.readObject();
 				String messageToClient= null;
-				clientText.append("------------------------------------------------------------------\n");
+				clientText.append("\n------------------------------------------------------------------\n");
 				clientText.append("Server : COMMAND RECEIVED - "+messageFromClient+"\n");
 				clientText.append("------------------------------------------------------------------\n");
 				
 				switch(messageFromClient) {
 					case "DAN_TURN_ON":
-						System.out.println("DAN is turning on. Please wait..");
+						clientText.append("DAN is turning on. Please wait..");
 						Thread.sleep(2000);
 						messageToClient = "DAN is turned on";
 						dan.setDAN_ON(true);
 						break;
 					case "DAN_TURN_PNG_ON":
-						System.out.println("DAN Pulsed Neutron Generator is turning on. Please wait.....");
+						clientText.append("DAN Pulsed Neutron Generator is turning on. Please wait.....");
 						Thread.sleep(1000);
-						messageToClient = turnPngOn(dan);
+						messageToClient = turnPngOn(dan, clientText);
 						break;
 					case "DAN_TURN_PNG_OFF" :
 						messageToClient = "DAN png is turned off";
 						break;
 					case "DAN_TURN_DE_ON":
 						messageToClient = "DAN de is turned on";
-						System.out.println("Measuring the rate of delayed neutron. Please wait...");
+						clientText.append("Measuring the rate of delayed neutron. Please wait...");
 						Thread.sleep(1000);
-						setHydFromSpeed(dan);
-						System.out.println("Measuring the rate of delayed neutron. Please wait...");
-						Thread.sleep(1000);
-						setHydFromSpeed(dan);
+						setHydFromSpeed(dan, clientText);
 						break;
 					case "DAN_TURN_DE_OFF":
 						messageToClient = "DAN de is turned off";
