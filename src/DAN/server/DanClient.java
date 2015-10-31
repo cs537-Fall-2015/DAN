@@ -61,6 +61,7 @@ public class DanClient extends RoverClientRunnable{
 		    		Thread.sleep(5000);
 		    	outputToAnotherObject.writeObject(commands[i]);
 		    	String message = (String) inputFromAnotherObject.readObject();
+
 		    	clientText.append(" \n");
 				clientText.append("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 		    	clientText.append("Client : Message from Server - " + message + "\n");
