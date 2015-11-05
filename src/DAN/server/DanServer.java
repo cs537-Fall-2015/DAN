@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.text.DefaultCaret;
 
 import json.MyWriter;
 import generic.RoverServerRunnable;
@@ -23,19 +23,19 @@ public class DanServer extends RoverServerRunnable {
 		super(port);
 	}
 	
-	public String turnPngOn(DanClass dan) throws InterruptedException {
+	public String turnPngOn(DanClass dan, JTextArea clientText) throws InterruptedException {
 		String message = null;
 		if(dan.isDAN_ON()) {
 			dan.setDAN_PNG_ON(true);
-			System.out.println("Generating Pulse Neutron..");
+			clientText.append("\nGenerating Pulse Neutron..\n");
 			Thread.sleep(3000);
 			message = " Pulsed Neutron is turned on Successfully";
 		}
 		return message;
 	}
-	public void setHydFromSpeed(DanClass dan) {
+	public void setHydFromSpeed(DanClass dan, JTextArea clientText) {
 		float hydInfo;
-		System.out.println("Speed of the Neutron is " +dan.getSpeed());
+		clientText.append("\n Speed of the Neutron is " +dan.getSpeed()+ "\n");
 
 		if (dan.getSpeed() < 25) {
 			hydInfo = 50 + (int)(Math.random() * (50 + 1));
@@ -63,6 +63,7 @@ public class DanServer extends RoverServerRunnable {
 		
 		DanClass dan = new DanClass ();
 		
+		// GUI starts here
 		JFrame window = new JFrame();
 		window.setBounds(100,100, 450, 300);
 		window.setTitle("Rover");
@@ -70,50 +71,59 @@ public class DanServer extends RoverServerRunnable {
 	    JPanel contentPane = new JPanel(new BorderLayout());
 		window.setContentPane(contentPane);
 		final JTextArea clientText = new JTextArea();
+		DefaultCaret caret = (DefaultCaret)clientText.getCaret();
+		 caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		JScrollPane scrollPane = new JScrollPane(clientText);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		final JTextField cmdText = new JTextField();
 		contentPane.add(cmdText,BorderLayout.SOUTH);
+		// Initialized all GUI
 		
 		try {
 			
 			getRoverServerSocket().openSocket();
 			
+			// Getting Input from Client
 			ObjectInputStream inputFromAnotherObject = new ObjectInputStream(getRoverServerSocket().getSocket().getInputStream());
+			// Writing output to Client
 			ObjectOutputStream outputToAnotherObject = new ObjectOutputStream(getRoverServerSocket().getSocket().getOutputStream());
 			
-			
+			// this loops run indefinitely, so that server will receive the commands one by one.
 			while(true) {
+				// Reading the message from client.
 				String messageFromClient = (String) inputFromAnotherObject.readObject();
+				// Store the messages to "messageToClient" before write the output to Client
 				String messageToClient= null;
-				clientText.append("------------------------------------------------------------------\n");
+				// Append the output to the Text area(GUI)
+				clientText.append("\n------------------------------------------------------------------\n");
 				clientText.append("Server : COMMAND RECEIVED - "+messageFromClient+"\n");
 				clientText.append("------------------------------------------------------------------\n");
 				
 				switch(messageFromClient) {
 					case "DAN_TURN_ON":
-						System.out.println("DAN is turning on. Please wait..");
+						clientText.append("DAN is turning on. Please wait..");
+						// Server thread sleep for 2000 milliseconds
 						Thread.sleep(2000);
 						messageToClient = "DAN is turned on";
+						// call the "setDAN_ON method to set the dan is turned on as true. 
 						dan.setDAN_ON(true);
 						break;
 					case "DAN_TURN_PNG_ON":
-						System.out.println("DAN Pulsed Neutron Generator is turning on. Please wait.....");
+						clientText.append("DAN Pulsed Neutron Generator is turning on. Please wait.....");
 						Thread.sleep(1000);
-						messageToClient = turnPngOn(dan);
+						// call the turnpngOn method to turn the png on.
+						messageToClient = turnPngOn(dan, clientText);
 						break;
 					case "DAN_TURN_PNG_OFF" :
 						messageToClient = "DAN png is turned off";
 						break;
 					case "DAN_TURN_DE_ON":
 						messageToClient = "DAN de is turned on";
-						System.out.println("Measuring the rate of delayed neutron. Please wait...");
+						clientText.append("Measuring the rate of delayed neutron. Please wait...");
 						Thread.sleep(1000);
-						setHydFromSpeed(dan);
-						System.out.println("Measuring the rate of delayed neutron. Please wait...");
-						Thread.sleep(1000);
-						setHydFromSpeed(dan);
+						// call setHydFromSpeed will set the hydrogen content which is calculated from the speed.
+						setHydFromSpeed(dan, clientText);
 						break;
 					case "DAN_TURN_DE_OFF":
 						messageToClient = "DAN de is turned off";
@@ -128,14 +138,17 @@ public class DanServer extends RoverServerRunnable {
 					default:
 						break;
 				}
-				
+				// write the message to the client (Don't do multiple write. It may stuck if you don't read in client after you from server)
 				outputToAnotherObject.writeObject(messageToClient);
+				// check if DAN_TURN_OFF and break the loop. So that server will not receieve any message from client.
+				// we may need work on the below line later to go to sleep for few mins and start to work again.
 				if (messageFromClient.equals("DAN_TURN_OFF")) {
 					break;
 				}
 			}
-			
+			// write the object to JSON file. you can look at the 10.json file for output.
 			new MyWriter(dan, 10);
+			
 			inputFromAnotherObject.close();
           	outputToAnotherObject.close();
 			// close the ServerSocket object

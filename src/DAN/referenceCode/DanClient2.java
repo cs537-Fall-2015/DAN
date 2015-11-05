@@ -26,6 +26,9 @@ public class DanClient2 extends RoverClientRunnable{
 		    outputToAnotherObject = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
 		    outputToAnotherObject.writeObject("Output Socket Power is ON");
 		    
+		    outputToAnotherObject.writeObject("Power is ON");		 
+		    
+		    //To close all
 	        closeAll();
 		}	        
         catch (UnknownHostException e) {

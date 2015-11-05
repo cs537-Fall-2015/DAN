@@ -5,8 +5,6 @@ import generic.RoverThreadHandler;
 import java.io.IOException;
 
 import DAN.server.DanServer;
-//import module2.ModuleTwoClient;
-//import module2.ModuleTwoServer;
 import DAN.server.DanClient;
 import json.Constants;
 
@@ -16,7 +14,6 @@ public class DAN_testMain {
 
 		//Each module has its own port
 		int port_one = Constants.PORT_ONE;
-		//int port_two = Constants.PORT_TWO;
 
 		try {
 			// create a thread for module one
@@ -29,9 +26,6 @@ public class DAN_testMain {
 			// client one server sending messages to server two
 			DanClient clientOne = new DanClient(port_one, null); // notice port_two
 			Thread client_1 = RoverThreadHandler.getRoverThreadHandler().getNewThread(clientOne);
-			// client two server sending messages to server one
-			//	ModuleTwoClient clientTwo = new ModuleTwoClient(port_one, null); // notice port_one
-			//	Thread client_2 = RoverThreadHandler.getRoverThreadHandler().getNewThread(clientOne);
 
 			// start the thread which communicates through sockets
 			client_1.start();
