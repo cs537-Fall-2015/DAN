@@ -1,14 +1,7 @@
 /DAN/
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 /DAN_testMain/
->>>>>>> 59a3bfca2df026a9dd4eca64258105c344f442ff
-/json/
->>>>>>> Stashed changes
-=======
-
-/DAN_testMain/
+/callback/
+/generic/
 /json/
 /main/
->>>>>>> 9e0e8944d3991b509012801688b663f18d13db35
+
