@@ -1,22 +1,20 @@
 package DAN.server;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.DefaultCaret;
-
-import json.Constants;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import generic.RoverClientRunnable;
 
@@ -47,6 +45,20 @@ public class DanClient extends RoverClientRunnable{
 			
 			final JTextField cmdText = new JTextField();
 			contentPane.add(cmdText,BorderLayout.SOUTH);
+			final JButton btnSend = new JButton("Send");
+			contentPane.add(btnSend, BorderLayout.LINE_END);
+			
+			cmdText.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					btnSend.doClick();
+					
+				}
+				
+			});
+
 
 		    
 		    // Write message to the server
