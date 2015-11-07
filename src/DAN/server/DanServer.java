@@ -72,12 +72,10 @@ public class DanServer extends RoverServerRunnable {
 		window.setContentPane(contentPane);
 		final JTextArea clientText = new JTextArea();
 		DefaultCaret caret = (DefaultCaret)clientText.getCaret();
-		 caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		JScrollPane scrollPane = new JScrollPane(clientText);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		final JTextField cmdText = new JTextField();
-		contentPane.add(cmdText,BorderLayout.SOUTH);
 		// Initialized all GUI
 		
 		try {
@@ -153,10 +151,7 @@ public class DanServer extends RoverServerRunnable {
           	outputToAnotherObject.close();
 			// close the ServerSocket object
 			closeAll();
-			
-			//inform the CCDS group9 about job completion.
-			//or else we will get Connection refused exception which is mostly due to Group 9 server being down 
-			//new CallBack().done();
+
 		}
 		
 		catch (IOException e)
