@@ -11,7 +11,19 @@ public class DanClass {
 	private double speed;
 	private double rover_x;
 	private double rover_y;
-	static String commands [] = { "DAN_TURN_ON",
+	
+	// list of data rover will require (requirements)
+	// including the cmds list for the module
+	// write that into the readMe file
+	// short or long test
+	// 12 minutes
+	// 30 minutes
+	// document time delay ratio
+	// asynchronous messages
+	// callback: can interrupt parent thread, to run child thread
+	// read cmds from a txt file, with time delay
+	
+	static String commands [] = { "DAN_TURN_ON", //should be in testing framework
 								  "DAN_TURN_PNG_ON",
 								  "DAN_TURN_PNG_OFF",
 								  "DAN_TURN_DE_ON",
