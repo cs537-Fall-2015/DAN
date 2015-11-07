@@ -16,4 +16,3 @@ This runs on Eclipse. (Preferably Version Mars)
 
 The program should create a file with the information about the rover's position (x, y),
 the speed of the neutron generator and the amount of hydrogen found.
-

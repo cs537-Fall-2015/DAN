@@ -1,4 +1,4 @@
-package DAN.server;
+package DAN.DAN_testMain;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.DefaultCaret;
 
+import DAN.server.DanClass;
 import generic.RoverClientRunnable;
 
 public class DanClient extends RoverClientRunnable{
@@ -52,7 +53,6 @@ public class DanClient extends RoverClientRunnable{
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
 					btnSend.doClick();
 					
 				}

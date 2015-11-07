@@ -138,7 +138,7 @@ public class DanServer extends RoverServerRunnable {
 				}
 				// write the message to the client (Don't do multiple write. It may stuck if you don't read in client after you from server)
 				outputToAnotherObject.writeObject(messageToClient);
-				// check if DAN_TURN_OFF and break the loop. So that server will not receieve any message from client.
+				// check if DAN_TURN_OFF and break the loop. So that server will not receive any message from client.
 				// we may need work on the below line later to go to sleep for few mins and start to work again.
 				if (messageFromClient.equals("DAN_TURN_OFF")) {
 					break;
