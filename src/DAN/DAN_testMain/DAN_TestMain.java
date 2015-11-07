@@ -22,16 +22,14 @@ public class DAN_TestMain {
 						
 			// Server begins listening
 			server_1.start();
-			DanClient clientOne = new DanClient(port_one, null); // notice port_two
+			DanClient clientOne = new DanClient(port_one, null);
 			Thread client_1 = RoverThreadHandler.getRoverThreadHandler().getNewThread(clientOne);
 			
 			//Client Listening
 			client_1.start();
 	
-			
 		} 
 		catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
