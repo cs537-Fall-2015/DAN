@@ -20,7 +20,7 @@ public class DANClient2 extends RoverClientRunnable{
 			ObjectOutputStream output = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
 			//Read message from server
 			ObjectInputStream input = new ObjectInputStream(getRoverSocket().getSocket().getInputStream());
-
+			
 			//test commands
 			String [] commands = {"DAN_ROVER_X", "DAN_ROVER_Y", "DAN_ON", "DAN_PNG_ON", "DAN_DE_ON", "DAN_PNG_OFF", "DAN_DE_OFF", "DAN_HYD_INFO", "DAN_OFF"};
 
@@ -30,7 +30,7 @@ public class DANClient2 extends RoverClientRunnable{
 				output.writeObject(commands[i]);
 				//read from server
 				String fromServerMessage = (String) input.readObject();
-				System.out.println("Test" + fromServerMessage);
+				System.out.println("Test: " + fromServerMessage);
 			}
 			
 			//close all connections
