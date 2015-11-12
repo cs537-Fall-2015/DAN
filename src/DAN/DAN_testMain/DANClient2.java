@@ -16,19 +16,13 @@ public class DANClient2 extends RoverClientRunnable{
 
 	public void run() {
 		try {
-			ObjectOutputStream output = null;
-			ObjectInputStream input = null;
-			Thread.sleep(2000);
-
-
-
 			//Write message to server
-			output = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
+			ObjectOutputStream output = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
 			//Read message from server
-			input = new ObjectInputStream(getRoverSocket().getSocket().getInputStream());
+			ObjectInputStream input = new ObjectInputStream(getRoverSocket().getSocket().getInputStream());
 
 			//test commands
-			String [] commands = {"DAN_ON", "DAN_PNG_ON", "DAN_DE_ON", "DAN_RESULTS"};
+			String [] commands = {"DAN_ROVER_X", "DAN_ROVER_Y", "DAN_ON", "DAN_PNG_ON", "DAN_DE_ON", "DAN_PNG_OFF", "DAN_DE_OFF", "DAN_HYD_INFO", "DAN_OFF"};
 
 			//Send each command to the server
 			for (int i = 0; i < commands.length; i++) {
@@ -39,11 +33,12 @@ public class DANClient2 extends RoverClientRunnable{
 				System.out.println("Test" + fromServerMessage);
 			}
 			
+			//close all connections
 			input.close();
 			output.close();
 			Thread.sleep(2000);
-			
 			closeAll();
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
