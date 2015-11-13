@@ -10,8 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
 
 import json.MyWriter;
@@ -33,35 +31,36 @@ public class DanServer extends RoverServerRunnable {
 		}
 		return message;
 	}
-	public void setHydFromSpeed(DanClass dan, JTextArea clientText) {
+	public void setHydFromSpeed(DANClass2 dan, JTextArea clientText) {
 		float hydInfo;
-		clientText.append("\n Speed of the Neutron is " +dan.getSpeed()+ "\n");
+		clientText.append("\n Speed of the Neutron is " +dan.getNEUTRON_VELOCITY()+ "\n");
 
-		if (dan.getSpeed() < 25) {
+		if (dan.getNEUTRON_VELOCITY() < 25) {
 			hydInfo = 50 + (int)(Math.random() * (50 + 1));
-			dan.setDAN_HYD_INFO(hydInfo);
+			dan.setHYD_AMOUNT(hydInfo);
 		}
-		else if( dan.getSpeed() >= 25 && dan.getSpeed() < 50)
+		else if( dan.getNEUTRON_VELOCITY() >= 25 && dan.getNEUTRON_VELOCITY() < 50)
 		{
 			hydInfo = 25 + (int)(Math.random() * (25 + 1));
-			dan.setDAN_HYD_INFO(hydInfo);
+			dan.setHYD_AMOUNT(hydInfo);
 		}
-		else if(dan.getSpeed() >= 50 && dan.getSpeed() < 75)
+		else if(dan.getNEUTRON_VELOCITY() >= 50 && dan.getNEUTRON_VELOCITY() < 75)
 		{
 			hydInfo = 0 + (int)(Math.random() * (25 + 1));
+			dan.setHYD_AMOUNT(hydInfo);
 		}
 		else 
 		{
 			hydInfo = 0;
 									
 		}
-		dan.setDAN_HYD_INFO(hydInfo);
+		dan.setHYD_AMOUNT(hydInfo);
 	}	
 
 	@Override
 	public void run() {
 		
-		DanClass dan = new DanClass ();
+		DANClass2 dan = new DANClass2 ();
 		
 		// GUI starts here
 		JFrame window = new JFrame();
@@ -111,7 +110,8 @@ public class DanServer extends RoverServerRunnable {
 						clientText.append("DAN Pulsed Neutron Generator is turning on. Please wait.....");
 						Thread.sleep(1000);
 						// call the turnpngOn method to turn the png on.
-						messageToClient = turnPngOn(dan, clientText);
+						messageToClient = "PNG is turned on";
+						dan.setPNG_ON(true);
 						break;
 					case "DAN_TURN_PNG_OFF" :
 						messageToClient = "DAN png is turned off";
@@ -128,7 +128,7 @@ public class DanServer extends RoverServerRunnable {
 						break;
 					case "DAN_HYD_INFO":
 
-						messageToClient = "Percentage of hydrogen found is " + dan.getDAN_HYD_INFO()+ "%";
+						messageToClient = "Percentage of hydrogen found is " + dan.getHYD_AMOUNT()+ "%";
 						break;
 					case "DAN_TURN_OFF":
 						messageToClient = "DAN turned off";
@@ -169,6 +169,7 @@ public class DanServer extends RoverServerRunnable {
 		}
 
 	}
+
 }
 
 
