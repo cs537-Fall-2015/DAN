@@ -3,6 +3,8 @@ package DAN.DAN_testMain;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
@@ -33,9 +35,11 @@ public class DanClient extends RoverClientRunnable{
 		    ObjectInputStream inputFromAnotherObject = null;
 		    Thread.sleep(5000);
 		    JFrame window = new JFrame();
-			window.setBounds(100,100, 450, 300);
-			window.setTitle("Client");
 		    window.setVisible(true);
+			//window.setBounds(100,100, 450, 300);
+		    window.setSize(300, 200);
+			window.setTitle("Client");
+		    
 		    JPanel contentPane = new JPanel(new BorderLayout());
 			window.setContentPane(contentPane);
 			final JTextArea clientText = new JTextArea();
@@ -65,10 +69,39 @@ public class DanClient extends RoverClientRunnable{
 		    outputToAnotherObject = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
 		    // Read message from the server
 		    inputFromAnotherObject = new ObjectInputStream(getRoverSocket().getSocket().getInputStream());
-	        // get all the commands from the DAN Class
-		    String [] commands = DanClass.getCommands();
+	        
+		    try {
+	            // FileReader reads text files in the default encoding.
+	            FileReader fileReader = 
+	                new FileReader("Commands.txt");
+
+	            // Always wrap FileReader in BufferedReader.
+	            BufferedReader bufferedReader = 
+	                new BufferedReader(fileReader);
+	            String command = null;
+	            while((command = bufferedReader.readLine()) != null) {
+	                System.out.println(command);
+	                if (command.toUpperCase().contains("OFF"))
+			    		Thread.sleep(5000);
+	                // writing the command to Server
+			    	outputToAnotherObject.writeObject(command);
+			    	// Reading the message from Server
+			    	String message = (String) inputFromAnotherObject.readObject();
+			    	clientText.append(" \n");
+					clientText.append("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+			    	clientText.append("Client : Message from Server - " + message + "\n");
+					clientText.append("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+					clientText.append(" \n");
+	            }   
+
+	            // Always close files.
+	            bufferedReader.close();         
+	        }        catch(Exception ex) {
+	        	ex.printStackTrace();
+	        }
+
 		    
-		    // send one by one command to the server
+		    /* send one by one command to the server
 		    for(int i = 0; i <commands.length; i++) {
 		    	
 		    	// this if loop is just to make it to sleep for 5000 milliseconds before executing every operation
@@ -85,7 +118,7 @@ public class DanClient extends RoverClientRunnable{
 		    	clientText.append("Client : Message from Server - " + message + "\n");
 				clientText.append("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 				clientText.append(" \n");
-		    }
+		    }*/
 	           	inputFromAnotherObject.close();
 	           	outputToAnotherObject.close();
 	           	Thread.sleep(5000);
