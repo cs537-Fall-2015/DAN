@@ -23,11 +23,13 @@ public class DANClient2 extends RoverClientRunnable{
 			
 			//test commands
 			String [] commands = {"DAN_ROVER_X", "DAN_ROVER_Y", "DAN_ON", "DAN_PNG_ON", "DAN_DE_ON", "DAN_PNG_OFF", "DAN_DE_OFF", "DAN_HYD_INFO", "DAN_OFF"};
-
+			
 			//Send each command to the server
 			for (int i = 0; i < commands.length; i++) {
 				//write to server
 				output.writeObject(commands[i]);
+				Thread.sleep(5000);
+				
 				//read from server
 				if(input.available() > 0) {
 					String fromServerMessage = (String) input.readObject();
@@ -40,7 +42,7 @@ public class DANClient2 extends RoverClientRunnable{
 			//close all connections
 			input.close();
 			output.close();
-			Thread.sleep(2000);
+//			Thread.sleep(2000);
 			closeAll();
 			
 		} catch (InterruptedException e) {
