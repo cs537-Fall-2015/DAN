@@ -2,7 +2,14 @@ package DAN.DAN_testMain;
 
 import generic.RoverThreadHandler;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import DAN.server.DanServer;
 import json.Constants;
@@ -15,6 +22,18 @@ public class DAN_TestMain {
 		int port_one = Constants.PORT_ONE;
 		
 		try {
+			
+			JFrame window = new JFrame();
+			window.setVisible(true);
+			window.setSize(300, 200);
+			window.setTitle("Main");
+			JPanel toPanel = new JPanel();
+			toPanel.setLayout(new CardLayout());
+			window.getContentPane().add(toPanel);
+			JTextArea clientText = new JTextArea();
+			JScrollPane scrollPane = new JScrollPane(clientText);
+			toPanel.add(scrollPane, BorderLayout.CENTER);
+			clientText.append("something");
 			
 			// create a thread for module one
 			DanServer serverOne = new DanServer(port_one);

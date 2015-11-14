@@ -66,6 +66,8 @@ public class DanServer extends RoverServerRunnable {
 		// GUI starts here
 		JFrame window = new JFrame();
 		window.setBounds(100,100, 450, 300);
+	    //window.setSize(300, 200);
+
 		window.setTitle("Rover");
 	    window.setVisible(true);
 	    JPanel contentPane = new JPanel(new BorderLayout());
