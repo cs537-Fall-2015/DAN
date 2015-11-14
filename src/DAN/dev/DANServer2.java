@@ -36,7 +36,6 @@ public class DANServer2 extends RoverServerRunnable{
 						messageToClient = "Getting rover's X position.";
 //						Thread.sleep(1000);
 						dan.setROVER_X(2.0);
-						System.out.println("test");
 						break;
 					case "DAN_ROVER_Y":
 						messageToClient = "Getting rover's Y position";

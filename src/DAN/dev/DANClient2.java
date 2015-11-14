@@ -28,7 +28,7 @@ public class DANClient2 extends RoverClientRunnable{
 			for (int i = 0; i < commands.length; i++) {
 				//write to server
 				output.writeObject(commands[i]);
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				
 				//read from server
 				if(input.available() > 0) {
