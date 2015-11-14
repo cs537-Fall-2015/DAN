@@ -1,4 +1,4 @@
-package DAN.server;
+package DAN.dev;
 
 public class DANClass2 {
 	private boolean DAN_ON; //DAN: Dynamic Albedo of Neutrons

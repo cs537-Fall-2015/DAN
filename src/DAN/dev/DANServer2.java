@@ -1,4 +1,4 @@
-package DAN.server;
+package DAN.dev;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -35,8 +35,7 @@ public class DANServer2 extends RoverServerRunnable{
 					case "DAN_ROVER_X":
 						messageToClient = "Getting rover's X position.";
 						Thread.sleep(1000);
-						dan.setROVER_X(2.0);
-						System.out.println("here");						
+						dan.setROVER_X(2.0);					
 						break;
 					case "DAN_ROVER_Y":
 						messageToClient = "Getting rover's Y position";
@@ -75,7 +74,7 @@ public class DANServer2 extends RoverServerRunnable{
 						messageToClient = "Information is being written to json file.";
 						//send message back to client
 						Thread.sleep(2000);
-						output.writeObject(messageToClient);
+						//output.writeObject(messageToClient);
 						break;
 					case "DAN_OFF":
 						messageToClient = "Dan is off.";
@@ -85,6 +84,8 @@ public class DANServer2 extends RoverServerRunnable{
 					default:
 						break;
 					}
+				output.writeObject(messageToClient);
+				
 				//check to see if DAN is still on
 				if (messageFromClient.equals("DAN_OFF")) {
 					break;

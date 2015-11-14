@@ -1,4 +1,4 @@
-package DAN.DAN_testMain;
+package DAN.dev;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -29,8 +29,12 @@ public class DANClient2 extends RoverClientRunnable{
 				//write to server
 				output.writeObject(commands[i]);
 				//read from server
-				String fromServerMessage = (String) input.readObject();
-				System.out.println("Test: " + fromServerMessage);
+				if(input.available() > 0) {
+					String fromServerMessage = (String) input.readObject();
+					System.out.println("Message From Server: " + fromServerMessage);
+				} else {
+					System.out.println("No Response");
+				}
 			}
 			
 			//close all connections
