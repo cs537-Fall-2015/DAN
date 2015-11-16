@@ -34,7 +34,7 @@ public class DanClient extends RoverClientRunnable{
 			ObjectOutputStream outputToAnotherObject = null;
 		    ObjectInputStream inputFromAnotherObject = null;
 		    Thread.sleep(5000);
-		    JFrame window = new JFrame();
+/*		    JFrame window = new JFrame();
 		    window.setVisible(true);
 			//window.setBounds(100,100, 450, 300);
 		    window.setSize(300, 200);
@@ -63,7 +63,7 @@ public class DanClient extends RoverClientRunnable{
 				
 			});
 
-
+*/
 		    
 		    // Write message to the server
 		    outputToAnotherObject = new ObjectOutputStream(getRoverSocket().getNewSocket().getOutputStream());
@@ -87,14 +87,20 @@ public class DanClient extends RoverClientRunnable{
 			    	outputToAnotherObject.writeObject(command);
 			    	// Reading the message from Server
 			    	String message = (String) inputFromAnotherObject.readObject();
-			    	clientText.append(" \n");
+/*			    	clientText.append(" \n");
 					clientText.append("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 			    	clientText.append("Client : Message from Server - " + message + "\n");
 					clientText.append("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 					clientText.append(" \n");
-	            }   
-
-	            // Always close files.
+	               
+*/					
+			    	System.out.println(" \n");
+			    	System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+			    	System.out.println("Client : Message from Server - " + message + "\n");
+			    	System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+			    	System.out.println(" \n");
+	            }
+			    // Always close files.
 	            bufferedReader.close();         
 	        }        catch(Exception ex) {
 	        	ex.printStackTrace();
