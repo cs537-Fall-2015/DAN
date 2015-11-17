@@ -60,7 +60,7 @@ public class DANClass2 {
 	}
 
 	public double getNEUTRON_COUNT() {
-		return NEUTRON_COUNT;
+		return Math.pow(10,7);
 	}
 
 	public void setNEUTRON_COUNT(double nEUTRON_COUNT) {
