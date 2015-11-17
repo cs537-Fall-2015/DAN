@@ -1,16 +1,16 @@
-package DAN.server;
-import callback.CallBack;
+package DAN.dev;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import callback.CallBack;
 
 public class DANClass2 {	
 	private boolean DAN_ON; //DAN: Dynamic Albedo of Neutrons
 	private boolean PNG_ON; //PNG: Pulsed Neutron Generator
 	private boolean DE_ON; //DE: Detector Element
 	
-	//Day of Mission
+	//Day and time of Mission
 	private String DE_TIME;
 	
 	//The number of neutrons
@@ -60,7 +60,7 @@ public class DANClass2 {
 	}
 
 	public double getNEUTRON_COUNT() {
-		return Math.pow(10,7);
+		return NEUTRON_COUNT;
 	}
 
 	public void setNEUTRON_COUNT(double nEUTRON_COUNT) {
