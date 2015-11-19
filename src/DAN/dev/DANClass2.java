@@ -14,13 +14,13 @@ public class DANClass2 {
 	private String DE_TIME;
 	
 	//The number of neutrons
-	private double NEUTRON_COUNT;
+	private int NEUTRON_COUNT;
 	
 	public DANClass2() {
 		setDAN_ON(false);
 		setPNG_ON(false);
 		setDE_ON(false);
-		setNEUTRON_COUNT(-1.0);
+		setNEUTRON_COUNT(-1);
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss:ms");
 		Date currentDate = new Date();
@@ -59,11 +59,11 @@ public class DANClass2 {
 		this.DE_TIME = date;
 	}
 
-	public double getNEUTRON_COUNT() {
+	public int getNEUTRON_COUNT() {
 		return NEUTRON_COUNT;
 	}
 
-	public void setNEUTRON_COUNT(double nEUTRON_COUNT) {
+	public void setNEUTRON_COUNT(int nEUTRON_COUNT) {
 		NEUTRON_COUNT = nEUTRON_COUNT;
 	}
 	
