@@ -9,9 +9,9 @@ import java.net.UnknownHostException;
 
 import generic.RoverClientRunnable;
 
-public class DanClient extends RoverClientRunnable{
+public class DANClient extends RoverClientRunnable{
 
-	public DanClient(int port, InetAddress host) throws UnknownHostException {
+	public DANClient(int port, InetAddress host) throws UnknownHostException {
 		super(port, host);
 	}
 

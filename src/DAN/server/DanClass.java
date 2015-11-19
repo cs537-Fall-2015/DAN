@@ -1,48 +1,31 @@
 package DAN.server;
 
-import callback.CallBack;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class DanClass {
-
-	static boolean DAN_ON; //DAN: Dynamic Albedo of Neutrons
-	static boolean DAN_PNG_ON; //PNG: Pulsed Neutron Generator
-	static boolean DAN_DE_ON; //DE: Detector Element
-	private double DAN_HYD_INFO; //HYD: Hydrogen
-	private double speed;
-	private double rover_x;
-	private double rover_y;
+public class DANClass {	
+	private boolean DAN_ON; //DAN: Dynamic Albedo of Neutrons
+	private boolean PNG_ON; //PNG: Pulsed Neutron Generator
+	private boolean DE_ON; //DE: Detector Element
 	
-	// list of data rover will require (requirements)
-	// including the cmds list for the module
-	// write that into the readMe file
-	// short or long test
-	// 12 minutes
-	// 30 minutes
-	// document time delay ratio
-	// asynchronous messages
-	// callback: can interrupt parent thread, to run child thread
-	// read cmds from a txt file, with time delay
+	//Day and time of Mission
+	private String DE_TIME;
 	
-	static String commands [] = { "DAN_TURN_ON", //should be in testing framework
-								  "DAN_TURN_PNG_ON",
-								  "DAN_TURN_PNG_OFF",
-								  "DAN_TURN_DE_ON",
-								  "DAN_TURN_DE_OFF",
-								  "DAN_HYD_INFO",
-								  "DAN_TURN_OFF"
-								};
+	//The number of neutrons
+	private int NEUTRON_COUNT;
 	
-
-	public DanClass() {
-		this.setDAN_ON(true);
-		this.setDAN_PNG_ON(true);
-		this.setDAN_DE_ON(false);
-		this.setDAN_HYD_INFO(0.0);
-		this.setSpeed(Math.random()*100);
-		this.setRover_x(10.0);
-		this.setRover_y(15.0);
+	public DANClass() {
+		setDAN_ON(false);
+		setPNG_ON(false);
+		setDE_ON(false);
+		setNEUTRON_COUNT(-1);
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss:ms");
+		Date currentDate = new Date();
+		setDE_TIME(dateFormat.format(currentDate));	
 	}
-	
+
 	public boolean isDAN_ON() {
 		return DAN_ON;
 	}
@@ -51,61 +34,36 @@ public class DanClass {
 		DAN_ON = dAN_ON;
 	}
 
-	public boolean isDAN_PNG_ON() {
-		return DAN_PNG_ON;
+	public boolean isPNG_ON() {
+		return PNG_ON;
 	}
 
-	public void setDAN_PNG_ON(boolean dAN_PNG_ON) {
-		DAN_PNG_ON = dAN_PNG_ON;
+	public void setPNG_ON(boolean pNG_ON) {
+		PNG_ON = pNG_ON;
 	}
 
-	public boolean isDAN_DE_ON() {
-		return DAN_DE_ON;
+	public boolean isDE_ON() {
+		return DE_ON;
 	}
 
-	public void setDAN_DE_ON(boolean dAN_DE_ON) {
-		DAN_DE_ON = dAN_DE_ON;
+	public void setDE_ON(boolean dE_ON) {
+		DE_ON = dE_ON;
 	}
 
-	public double getSpeed() {
-		return speed;
+	public String getDE_TIME() {
+		return DE_TIME;
 	}
 
-	public void setSpeed(double speed) {
-		this.speed = speed;
+	public void setDE_TIME(String date) {
+		this.DE_TIME = date;
 	}
 
-	public double getRover_x() {
-		return rover_x;
+	public double getNEUTRON_COUNT() {
+		return NEUTRON_COUNT;
 	}
 
-	public void setRover_x(double rover_x) {
-		this.rover_x = rover_x;
+	public void setNEUTRON_COUNT(int nEUTRON_COUNT) {
+		NEUTRON_COUNT = nEUTRON_COUNT;
 	}
-
-	public double getRover_y() {
-		return rover_y;
-	}
-
-	public void setRover_y(double rover_y) {
-		this.rover_y = rover_y;
-	}
-
-	public static void setCommands(String[] commands) {
-		DanClass.commands = commands;
-	}
-
-	public static String[] getCommands() {
-		return commands;
-	}
-
-	public double getDAN_HYD_INFO() {
-		return DAN_HYD_INFO;
-	}
-
-	public void setDAN_HYD_INFO(double dAN_HYD_INFO) {
-		DAN_HYD_INFO = dAN_HYD_INFO;
-	}
-
 	
 }
