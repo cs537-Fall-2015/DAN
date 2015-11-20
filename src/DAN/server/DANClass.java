@@ -4,24 +4,27 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DANClass2 {	
+public class DANClass {	
 	private boolean DAN_ON; //DAN: Dynamic Albedo of Neutrons
 	private boolean PNG_ON; //PNG: Pulsed Neutron Generator
 	private boolean DE_ON; //DE: Detector Element
 	
-	//Day of Mission
+	//Day and time of Mission
 	private String DE_TIME;
 	
 	//The number of neutrons
-	private double NEUTRON_COUNT;
+	private int NEUTRON_COUNT;
 	
-	public DANClass2() {
+	public DANClass() {
 		setDAN_ON(false);
 		setPNG_ON(false);
 		setDE_ON(false);
-		setNEUTRON_COUNT(-1.0);
+		setNEUTRON_COUNT(-1);
 		
-		setDE_TIME(null);	
+		/*DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss:ms");
+		Date currentDate = new Date();
+		setDE_TIME(dateFormat.format(currentDate));*/
+		setDE_TIME(null);
 	}
 
 	public boolean isDAN_ON() {
@@ -60,7 +63,7 @@ public class DANClass2 {
 		return NEUTRON_COUNT;
 	}
 
-	public void setNEUTRON_COUNT(double nEUTRON_COUNT) {
+	public void setNEUTRON_COUNT(int nEUTRON_COUNT) {
 		NEUTRON_COUNT = nEUTRON_COUNT;
 	}
 	
