@@ -6,7 +6,11 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -111,7 +115,7 @@ public class ClientGUI{
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setLayout(new GridLayout(1, 3));
+		panel.setLayout(new GridLayout(1, 5));
 		Dan_on = new JButton("DAN ON");
 		
 		Dan_on.setSize(10, 10);
@@ -120,6 +124,41 @@ public class ClientGUI{
 		
 		automaticCheckBox = new JCheckBox("Automatic");
 		panel.add(automaticCheckBox);
+		
+		JButton saveButton = new JButton("Save");
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String workingDir = System.getProperty("user.dir");
+				
+
+				workingDir +="\\logs\\log_"+(new Date().getTime()/1000)+".txt";
+				
+				PrintWriter writer = null;
+				try {
+					writer = new PrintWriter(workingDir, "UTF-8");
+					writer.println(textArea.getText());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedEncodingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				textArea.append("Logs Saved at the directory " + workingDir);
+				writer.close();
+			}
+		});
+		saveButton.setSize(10,10);
+		panel.add(saveButton);
+		
+		JButton clearButton = new JButton("Clear");
+		clearButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText(null);
+			}
+		});
+		clearButton.setSize(10, 10);
+		panel.add(clearButton);
 		JButton exitButton = new JButton("Exit");
 		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -157,6 +196,7 @@ public class ClientGUI{
 
         
         panel_1.add(cp);
+        
 
 		Dan_on.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
