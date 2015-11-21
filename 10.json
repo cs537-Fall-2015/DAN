@@ -1,7 +1,7 @@
 {
-  "DAN_ON": true,
-  "PNG_ON": true,
-  "DE_ON": true,
-  "DE_TIME": "2015/11/20 18:24:49:2449",
-  "NEUTRON_COUNT": 615693030
+  "DAN_ON": false,
+  "PNG_ON": false,
+  "DE_ON": false,
+  "DE_TIME": "2015/11/20 20:21:07:217",
+  "NEUTRON_COUNT": 115457095
 }

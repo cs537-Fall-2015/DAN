@@ -13,12 +13,13 @@ import json.MyWriter;
 import DAN.DAN_testMain.*;
 
 public class DANServer extends RoverServerRunnable{
-	
+	ObjectInputStream inputFromAnotherObject;
+	ObjectOutputStream outputToAnotherObject;
 	public DANServer(int port) throws IOException {
 		super(port);
 		
 	}
-
+	
 	public void run(){
 		
 		DANClass dan = new DANClass();
@@ -27,9 +28,9 @@ public class DANServer extends RoverServerRunnable{
 			
 			getRoverServerSocket().openSocket();
 			
-			ObjectInputStream inputFromAnotherObject = new ObjectInputStream(getRoverServerSocket().getSocket().getInputStream());
+			inputFromAnotherObject = new ObjectInputStream(getRoverServerSocket().getSocket().getInputStream());
 			
-			ObjectOutputStream outputToAnotherObject = new ObjectOutputStream(getRoverServerSocket().getSocket().getOutputStream());
+			outputToAnotherObject = new ObjectOutputStream(getRoverServerSocket().getSocket().getOutputStream());
 			
 			while(true){
 				
@@ -154,15 +155,19 @@ public class DANServer extends RoverServerRunnable{
 				
 				outputToAnotherObject.writeObject(messageToClient);
 				// write the object to JSON file. Look at the 10.json file for output.
-				new MyWriter(dan, 10);
-				// check for DAN_OFF command and break the while loop so that server will not receive any further messages from client.
-				if(messageFromClient.equals("DAN_OFF") && !(ClientGUI.isAutomatic))
+				if (messageFromClient.equals("DAN_OFF"))
+					new MyWriter(dan, 10);
+				
+				if (DAN.DAN_testMain.ClientGUI.isClosed())
 					break;
+				// check for DAN_OFF command and break the while loop so that server will not receive any further messages from client.
+				//if(messageFromClient.equals("DAN_OFF") && !(ClientGUI.isAutomatic))
+					//break;
 				
 			}
 			
 			// write the object to JSON file. Look at the 10.json file for output.
-			new MyWriter(dan, 10);
+			//new MyWriter(dan, 10);
 			
 			inputFromAnotherObject.close();
 			outputToAnotherObject.close();

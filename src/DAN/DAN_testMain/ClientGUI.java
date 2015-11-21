@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -37,6 +38,7 @@ public class ClientGUI{
 	JScrollPane scroll;
 	XYSeries series;
 	boolean isDanOn;
+	static boolean closedButtonPressed;
 	public static boolean isAutomatic;
 	
 
@@ -65,6 +67,7 @@ public class ClientGUI{
 	 ClientGUI() {
 		 isDanOn = false;
 		 isAutomatic = false;
+		 closedButtonPressed = false;
 		 initialize();
 	}
 	 
@@ -84,10 +87,17 @@ public class ClientGUI{
 	 }
 	 
 	 void changeButtonColor(String command) {
-		 if (command.equals("DAN_ON"))
-				Dan_on.setForeground(Color.GREEN);
-		 else if (command.equals("DAN_OFF"))
+		 if (command.equals("DAN_ON")) {
+			Dan_on.setForeground(Color.GREEN);
+			isDanOn = true;
+		 }
+		 else if (command.equals("DAN_OFF")) {
 			Dan_on.setForeground(Color.RED);
+			isDanOn=false;
+		 }
+	 }
+	 public static boolean isClosed() {
+		 return closedButtonPressed;
 	 }
 
 	/**
@@ -95,14 +105,13 @@ public class ClientGUI{
 	 */
 	private void initialize() {
 		
-		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
-		panel.setLayout(new GridLayout(1, 2));
+		panel.setLayout(new GridLayout(1, 3));
 		Dan_on = new JButton("DAN ON");
 		
 		Dan_on.setSize(10, 10);
@@ -111,6 +120,17 @@ public class ClientGUI{
 		
 		automaticCheckBox = new JCheckBox("Automatic");
 		panel.add(automaticCheckBox);
+		JButton exitButton = new JButton("Exit");
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				closedButtonPressed = true;
+				System.exit(0);
+			}
+		});
+		exitButton.setSize(10,10);
+		panel.add(exitButton);
+		
+		Dan_on.setSize(10, 10);
 		
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
@@ -150,6 +170,23 @@ public class ClientGUI{
 				
 			}
 		});
+		/*frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	try {
+					
+					DAN.server.DANServer.closeServer();
+					DanClient.closeClient();
+					Thread.sleep(1000);
+		            System.exit(0);
+				} catch (IOException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	
+		    	
+		    }
+		});*/
 	}
 	
 }
