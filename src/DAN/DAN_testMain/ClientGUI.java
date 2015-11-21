@@ -82,6 +82,13 @@ public class ClientGUI{
 		 
 		 series.add(Integer.parseInt(builder.toString()), neutronCount);
 	 }
+	 
+	 void changeButtonColor(String command) {
+		 if (command.equals("DAN_ON"))
+				Dan_on.setForeground(Color.GREEN);
+		 else if (command.equals("DAN_OFF"))
+			Dan_on.setForeground(Color.RED);
+	 }
 
 	/**
 	 * Initialize the contents of the frame.
@@ -136,7 +143,7 @@ public class ClientGUI{
 				
 
 				isDanOn = true;
-				Dan_on.setForeground(Color.GREEN);
+				//Dan_on.setForeground(Color.GREEN);
 				if (automaticCheckBox.isSelected())
 					isAutomatic = true;
 				

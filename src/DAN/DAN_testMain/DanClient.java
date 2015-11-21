@@ -73,6 +73,8 @@ public class DanClient extends RoverClientRunnable{
 				    	window.println("Client Says: MESSAGE RECEIVED - " + message);
 				    	window.println("\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 				    	
+				    	window.changeButtonColor(command);
+				    	
 				    	Thread.sleep(5000);
 		            }
 				    // Always close files.
