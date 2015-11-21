@@ -59,7 +59,7 @@ public class DANClass {
 		this.DE_TIME = date;
 	}
 
-	public double getNEUTRON_COUNT() {
+	public int getNEUTRON_COUNT() {
 		return NEUTRON_COUNT;
 	}
 
