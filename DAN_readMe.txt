@@ -6,8 +6,13 @@ This runs on Eclipse. (Preferably Version Mars)
 -JFreeChart 1.0.19 
 -JCommon 1.0.23
 
-+Create a libs folder if needed and search for the JARS online
-+Download the JARS and place them in the libs folder
++If the libs folder does not exist:
+-Create a libs folder if needed and search for the JARS online
+-Download the JARS and place them in the libs folder
+
++If the JARS are missing:
+-Search for the JARS online
+-Download the JARS and place them in the libs folder
 
 +To add JARS to Eclipse
 -import the project into Eclipse
