@@ -31,7 +31,8 @@ By pressing the "DAN ON" button once, the DAN will perform one complete run
 through all the commands given in the "commands.txt" file.
 When checking the "Automatic" checkbox and pressing the "DAN ON" button, the
 program will continuously loop by constantly calling the "commands.txt" file.
+The logs on the GUI can be saved as well as cleared. (Logs are saved in the logs folder.)
 To stop the program press the "Exit" button.
 
-On the bottom of the GUI, a graph of Time versus Number of neutrons is displayed.
+On the bottom of the GUI, a graph of "Time versus Number of neutrons" is displayed.
 As the program runs, the number of neutrons is calculated at a certain time and plotted on the graph.
